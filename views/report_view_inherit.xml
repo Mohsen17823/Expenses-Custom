@@ -1,0 +1,110 @@
+<odoo>
+    <record id="view_report_form_inherit" model="ir.ui.view">
+        <field name="name">view report form</field>
+        <field name="model">hr.expense.sheet</field>
+        <field name="inherit_id" ref="hr_expense.view_hr_expense_sheet_form"/>
+        <field name="arch" type="xml">
+            <!--     Start Buttons       -->
+            <xpath expr="//button[@name='action_submit_sheet']" position="replace">
+                <button name="action_submit_sheet_validation"
+                        type="object"
+                        string="Submit"
+                        class="btn-primary"
+                        invisible="state != 'draft'"/>
+            </xpath>
+
+            <xpath expr="//button[@name='action_approve_expense_sheets']" position="attributes">
+                <attribute name="invisible">state != 'submit'</attribute>
+                <attribute name="groups">expenses.line_manger_approval_group</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='action_refuse_expense_sheets']" position="attributes">
+                <attribute name="string">Reject</attribute>
+                <attribute name="invisible">flag_buttons not in ('line_manager','hr','review','finance_approve','payment')</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='action_refuse_expense_sheets']" position="after">
+                <button name="action_open_recall_wizard"
+                        string="Recall"
+                        type="object"
+                        class="btn-secondary"
+                        invisible="flag_buttons not in ('line_manager','hr','review','finance_approve','payment')"
+                />
+            </xpath>
+
+            <xpath expr="//button[@name='action_refuse_expense_sheets']" position="before">
+                <button name="action_hr_approve_expense_sheets"
+                        type="object"
+                        class="btn-primary"
+                        string="Approve"
+                        invisible="state != 'hr'"
+                        groups="expenses.hr_approval_group"
+                />
+            </xpath>
+
+            <xpath expr="//button[@name='action_hr_approve_expense_sheets']" position="before">
+                <button name="action_finance_review_expense_sheets"
+                        type="object"
+                        class="btn-primary"
+                        string="Reviewed"
+                        invisible="state != 'review'"
+                        groups="expenses.finance_review_group"
+                />
+            </xpath>
+
+            <xpath expr="//button[@name='action_sheet_move_create']" position="attributes">
+                <attribute name="string">Approve</attribute>
+                <attribute name="groups">expenses.finance_approval_group</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='action_register_payment']" position="attributes">
+                <attribute name="groups">expenses.payment_approval_group</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='action_reset_approval_expense_sheets']" position="attributes">
+                <attribute name="groups">expenses.reset_to_draft_group</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='action_open_expense_view']" position="attributes">
+                <attribute name="invisible">not can_click</attribute>
+            </xpath>
+            <!--     End Buttons       -->
+
+            <!--     Start Fields       -->
+            <field name="user_id" position="after">
+                <field name="can_click" invisible="1" readonly="1"/>
+            </field>
+
+            <field name="state" position="attributes">
+                <attribute name="statusbar_visible">draft,submit,hr,review,approve,post,done</attribute>
+            </field>
+
+            <field name="employee_id" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+
+            <field name="payment_mode" position="replace">
+                <field name="payment_mode"
+                       readonly="not user_in_paid_group"
+                />
+            </field>
+
+            <field name="payment_mode" position="before">
+                <field name="user_in_paid_group" invisible="1"/>
+                <field name="flag_buttons" invisible="1" readonly="1"/>
+            </field>
+
+            <field name="employee_journal_id" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+
+            <field name="user_id" position="attributes">
+                <attribute name="string">Line Manager</attribute>
+                <attribute name="readonly">0</attribute>
+            </field>
+            <!--     End Fields       -->
+        </field>
+    </record>
+</odoo>
+
+

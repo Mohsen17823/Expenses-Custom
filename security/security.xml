@@ -1,0 +1,58 @@
+<odoo>
+    <record id="expenses_enhance_category" model="ir.module.category">
+        <field name="name">Expenses Custom</field>
+    </record>
+
+    <record id="expenses_model_group" model="res.groups">
+        <field name="name">My Expenses</field>
+        <field name="category_id" ref="expenses.expenses_enhance_category"/>
+    </record>
+
+    <record id="paid_by_group" model="res.groups">
+        <field name="name">Edit Paid By</field>
+        <field name="category_id" ref="expenses.expenses_enhance_category"/>
+    </record>
+
+    <record id="line_manger_approval_group" model="res.groups">
+        <field name="name">Line Manager Approval</field>
+        <field name="category_id" ref="expenses.expenses_enhance_category"/>
+    </record>
+
+    <record id="hr_approval_group" model="res.groups">
+        <field name="name">HR Approval</field>
+        <field name="category_id" ref="expenses.expenses_enhance_category"/>
+    </record>
+
+    <record id="finance_review_group" model="res.groups">
+        <field name="name">Finance Review</field>
+        <field name="category_id" ref="expenses.expenses_enhance_category"/>
+    </record>
+
+    <record id="finance_approval_group" model="res.groups">
+        <field name="name">Finance Approval</field>
+        <field name="category_id" ref="expenses.expenses_enhance_category"/>
+        <field name="implied_ids" eval="[(4, ref('expenses.finance_review_group'))]"/>
+    </record>
+
+    <record id="payment_approval_group" model="res.groups">
+        <field name="name">Payment Approval</field>
+        <field name="category_id" ref="expenses.expenses_enhance_category"/>
+    </record>
+
+    <record id="reset_to_draft_group" model="res.groups">
+        <field name="name">To-Draft Group</field>
+        <field name="category_id" ref="expenses.expenses_enhance_category"/>
+    </record>
+
+    <record id="c_level_group" model="res.groups">
+        <field name="name">C Level</field>
+        <field name="category_id" ref="expenses.expenses_enhance_category"/>
+    </record>
+
+    <record id="cfo_cycle_approval_group" model="res.groups">
+        <field name="name">CFO Cycle Approval</field>
+        <field name="category_id" ref="expenses.expenses_enhance_category"/>
+    </record>
+
+
+</odoo>
