@@ -17,7 +17,7 @@ This project customizes the Expenses module in Odoo by introducing a multi-stage
 - A new wizard was added to recall the report even after cancellation or at any state.
 
 ## 🧩 Modules Included
-- expenses_categories → Adding new fields like Expense Limit, where if checked, the Amount field appears to add the amount of this category; if this                         category exceeds this amount per year, it will raise a validation as mentioned above. The Approval Type field makes the                              report cross the approval state if it was HR or Reviewer
+- expenses_categories → Adding new fields like Expense Limit, where if checked, the Amount field appears to add the amount of this category; if this                         category exceeds this amount per year, it will raise a validation as mentioned above. The Approval Type field makes the                              report cross the approval state if it was HR or Finance
 <img width="1751" height="716" alt="Untitled design" src="https://github.com/user-attachments/assets/c08c665a-7aa5-4f4a-ba8d-d959738c9853" />
 
 - report → The main model that has all constrains,states, and validations 
